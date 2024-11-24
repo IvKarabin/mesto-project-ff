@@ -23,6 +23,7 @@ const placesList = document.querySelector('.places__list');
 
 function createCard(cardDesc, deleteCardCall) {
   
+  
   const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
   const cardImage = cardElement.querySelector('.card__image');
   
