@@ -12,7 +12,7 @@ const addPopup = document.querySelector('.popup_type_new-card');
 const editFormProfile = document.querySelector('.popup__form[name="edit-profile"]');
 const editFormProfileTitle = document.querySelector('.profile__title');
 const editFormProfileDescription = document.querySelector('.profile__description');
-const editFormProfileInputName = document.querySelector('popup__input_type_name');
+const editFormProfileInputName = document.querySelector('.popup__input_type_name');
 const editFormProfileInputDescription = document.querySelector('.popup__input_type_description');
 const addFormCard = document.querySelector('.popup__form[name="new-place"]');
 const addFormPlaceInputName = document.querySelector('.popup__input_type_card-name');
@@ -75,6 +75,8 @@ function addFormCardHandler(evt) {
         alt: addFormPlaceInputName.value,
     };
     places.prepend(createCard(newCard, removeCard, likeCard, openImage));
+    addFormPlaceInputName.value = '';
+    addFormPlaceInputUrl.value = '';
     closeModal(addPopup);
 };
 

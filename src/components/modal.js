@@ -1,7 +1,7 @@
 //функция открытия
 export function openModal(modal) {
-    modal.classList.add('popup_is-active');
-    modal.classList.add('popup_is-open');
+    modal.classList.add('popup_is-animated');
+    modal.classList.add('popup_is-opened');
 
     document.addEventListener('keydown', handleEscape);
     modal.addEventListener('click', handleOverlayClick);
@@ -9,8 +9,8 @@ export function openModal(modal) {
 
 //функция закрытия
 export function closeModal(modal) {
-    modal.classList.remove('popup_is-active');
-    modal.classList.remove('popup_is-open');
+    modal.classList.remove('popup_is-animated');
+    modal.classList.remove('popup_is-opened');
 
     modal.removeEventListener('click', handleOverlayClick);
     document.removeEventListener('keydown', handleEscape);
@@ -18,7 +18,7 @@ export function closeModal(modal) {
 
 //обработка нажатия эскейпа
 function handleEscape(evt) {
-    const openedPopup = document.querySelector('.popup_is-open');
+    const openedPopup = document.querySelector('.popup_is-opened');
     if (openedPopup && evt.key === 'Escape') {
         closeModal(openedPopup);
     };
@@ -26,7 +26,7 @@ function handleEscape(evt) {
 
 //обработка клика по оверлею
 function handleOverlayClick(evt) {
-    if (evt.target.classList.contains('popup_is-open')) {
+    if (evt.target.classList.contains('popup_is-opened')) {
         closeModal(evt.target);
     };
 };
