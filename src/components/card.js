@@ -1,6 +1,6 @@
 //функция вывода
 export function createCard(card, removeCard, likeCard, openImage) {
-    const cardTemplate = document.querySelector('#card-template').textContent;
+    const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.places__item').cloneNode(true);
     const cardImage = cardElement.querySelector('.card__image');
     const deleteButton = cardElement.querySelector('.card__delete-button');
@@ -8,7 +8,7 @@ export function createCard(card, removeCard, likeCard, openImage) {
 
     cardImage.src = card.link;
     cardImage.alt = card.alt;
-    card.name = cardElement.querySelector('.card__title').textContent;
+    cardElement.querySelector('.card__title').textContent = card.name;
 
     deleteButton.addEventListener('click', () => removeCard(cardImage));
     likeButton.addEventListener('click', () => likeCard(likeButton));

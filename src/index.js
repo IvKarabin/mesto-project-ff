@@ -13,7 +13,7 @@ const editFormProfile = document.querySelector('.popup__form[name="edit-profile"
 const editFormProfileTitle = document.querySelector('.profile__title');
 const editFormProfileDescription = document.querySelector('.profile__description');
 const editFormProfileInputName = document.querySelector('popup__input_type_name');
-const editFormInputDescription = document.querySelector('.popup__input_type_description');
+const editFormProfileInputDescription = document.querySelector('.popup__input_type_description');
 const addFormCard = document.querySelector('.popup__form[name="new-place"]');
 const addFormPlaceInputName = document.querySelector('.popup__input_type_card-name');
 const addFormPlaceInputUrl = document.querySelector('.popup__input_type_url');
@@ -29,7 +29,7 @@ initialCards.forEach(function(item) {
 // Слушатели нажатия кнопок
 profileEditButton.addEventListener('click', function() {
     editFormProfileInputName.value = editFormProfileTitle.textContent;
-    editFormInputDescription.value = editFormProfileDescription.textContent;
+    editFormProfileInputDescription.value = editFormProfileDescription.textContent;
     openModal(editPopup);
 });
 
@@ -37,6 +37,7 @@ addCardButton.addEventListener('click', function() {
     openModal(addCardPopup);
 });
 
+//функция открытия картинки по нажатию
 function openImage(evt) {
     const popupImage = document.querySelector('.popup__image');
     const popupImageTitle = evt.target.closest('.card').querySelector('.card__title');
@@ -61,7 +62,7 @@ page.addEventListener('click', function(evt) {
 function editFormProfileHandler(evt) {
     evt.preventDefault();
     editFormProfileTitle.textContent = editFormProfileInputName.value;
-    editFormProfileDescription.textContent = editFormInputDescription.value;
+    editFormProfileDescription.textContent = editFormProfileInputDescription.value;
     closeModal(editPopup);
 };
 
