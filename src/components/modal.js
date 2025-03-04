@@ -18,9 +18,11 @@ export function closeModal(modal) {
 
 //обработка нажатия эскейпа
 function handleEscape(evt) {
-    const openedPopup = document.querySelector('.popup_is-opened');
-    if (openedPopup && evt.key === 'Escape') {
-        closeModal(openedPopup);
+    if (evt.key === 'Escape') {
+        const openedPopup = document.querySelector('.popup_is-opened');
+        if (openedPopup) {
+            closeModal(openedPopup);
+        };
     };
 };
 

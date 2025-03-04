@@ -20,6 +20,9 @@ const addFormPlaceInputUrl = document.querySelector('.popup__input_type_url');
 const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_new-card');
 const imagePopup = document.querySelector('.popup_type_image');
+const popupImage = document.querySelector('.popup__image');
+const popupImageTitle = evt.target.closest('.card').querySelector('.card__title');
+const popupImageDescription = document.querySelector('.popup__caption');
 
 // Вывод карточек
 initialCards.forEach(function(item) {
@@ -39,9 +42,6 @@ addCardButton.addEventListener('click', function() {
 
 //функция открытия картинки по нажатию
 function openImage(evt) {
-    const popupImage = document.querySelector('.popup__image');
-    const popupImageTitle = evt.target.closest('.card').querySelector('.card__title');
-    const popupImageDescription = document.querySelector('.popup__caption');
     popupImage.src = evt.target.src;
     popupImage.alt = evt.target.alt;
     popupImageDescription.textContent = popupImageTitle.textContent;
@@ -75,8 +75,7 @@ function addFormCardHandler(evt) {
         alt: addFormPlaceInputName.value,
     };
     places.prepend(createCard(newCard, removeCard, likeCard, openImage));
-    addFormPlaceInputName.value = '';
-    addFormPlaceInputUrl.value = '';
+    evt.target.reset();
     closeModal(addPopup);
 };
 
