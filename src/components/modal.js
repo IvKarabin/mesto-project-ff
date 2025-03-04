@@ -9,7 +9,7 @@ export function openModal(modal) {
 
 //функция закрытия
 export function closeModal(modal) {
-    modal.classList.remove('popup_is-animated');
+    setTimeout(() => {modal.classList.remove('popup_is-animated')}, 600);
     modal.classList.remove('popup_is-opened');
 
     modal.removeEventListener('click', handleOverlayClick);

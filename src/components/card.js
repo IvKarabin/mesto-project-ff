@@ -24,5 +24,5 @@ export function removeCard(item) {
 
 //функция лайка
 export function likeCard(item) {
-    item.classList.toggle('card__like-button_is_active');
+    item.classList.toggle('card__like-button_is-active');
 };

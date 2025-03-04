@@ -7,7 +7,7 @@ import { openModal, closeModal } from './components/modal';
 const places = document.querySelector('.places__list');
 const page = document.querySelector('.page');
 const profileEditButton = document.querySelector('.profile__edit-button');
-const editPopup = document.querySelector('.popup_type-edit');
+const editPopup = document.querySelector('.popup_type_edit');
 const addPopup = document.querySelector('.popup_type_new-card');
 const editFormProfile = document.querySelector('.popup__form[name="edit-profile"]');
 const editFormProfileTitle = document.querySelector('.profile__title');
@@ -17,7 +17,7 @@ const editFormProfileInputDescription = document.querySelector('.popup__input_ty
 const addFormCard = document.querySelector('.popup__form[name="new-place"]');
 const addFormPlaceInputName = document.querySelector('.popup__input_type_card-name');
 const addFormPlaceInputUrl = document.querySelector('.popup__input_type_url');
-const addCardButton = document.querySelector('.popup__add-button');
+const addCardButton = document.querySelector('.profile__add-button');
 const addCardPopup = document.querySelector('.popup_type_new-card');
 const imagePopup = document.querySelector('.popup_type_image');
 
