@@ -2,6 +2,17 @@ import './pages/index.css';
 import { initialCards } from './scripts/cards';
 import { createCard, removeCard, likeCard } from './components/card';
 import { openModal, closeModal } from './components/modal';
+import { enableValidation, clearValidation } from './components/validation';
+
+// Конфиг для проверки валидации
+const validationConfig = {
+    formSelector: '.popup__form',
+    inputSelector: '.popup__input',
+    submitButtonSelector: '.popup__button',
+    inactiveButtonClass: 'popup__button_disabled',
+    inputErrorClass: 'popup__input_type_error',
+    errorClass: 'popup__error_visible'
+};
 
 // DOM-узлы
 const places = document.querySelector('.places__list');
@@ -23,6 +34,9 @@ const imagePopup = document.querySelector('.popup_type_image');
 const popupImage = document.querySelector('.popup__image');
 const popupImageTitle = evt.target.closest('.card').querySelector('.card__title');
 const popupImageDescription = document.querySelector('.popup__caption');
+
+// Вызов валидации
+enableValidation(validationConfig);
 
 // Вывод карточек
 initialCards.forEach(function(item) {
