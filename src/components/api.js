@@ -21,8 +21,7 @@ export function getUserData() {
         headers: {
             authorization: configApi.authToken
         }
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // получение карточек
@@ -31,8 +30,7 @@ export function getCardData() {
         headers: {
             authorization: configApi.authToken,
         }
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // постинг карточек
@@ -47,8 +45,7 @@ export function postCard(cardData) {
             name: cardData.name,
             link: cardData.link,
         })
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // удаление карточек
@@ -58,8 +55,7 @@ export function deleteCardApi (cardId) {
         headers: {
             authorization: configApi.authToken
         }
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // изменение информации о пользователе
@@ -74,8 +70,7 @@ export function patchUserData(name, about) {
             name: name,
             about: about
         })
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // изменение аватарки пользователя
@@ -89,8 +84,7 @@ export function patchUserAvatar(avatar) {
         body: JSON.stringify({
             avatar: avatar
         })
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // лайк карточек
@@ -100,8 +94,7 @@ export function likeCardApi(cardId) {
         headers: {
             authorization: configApi.authToken
         }
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 
 // удаление лайка карточек
@@ -111,7 +104,6 @@ export function unlikeCardApi(cardId) {
         headers: {
             authorization: configApi.authToken
         }
-    })
-    .then((res) => statusCheck(res));
+    }).then((res) => statusCheck(res));
 };
 // конец функций для экспорта
