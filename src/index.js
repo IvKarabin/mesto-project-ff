@@ -35,11 +35,9 @@ const avatarPopup = document.querySelector('.popup_type_avatar');
 const popupImage = document.querySelector('.popup__image');
 const popupImageDescription = document.querySelector('.popup__caption');
 // формы
-const formProfile = document.forms.editProfile;
-const formCard = document.forms.newPlace;
-const formAvatar = document.forms.editAvatar;
-
-const popupImageTitle = evt.target.closest('.card').querySelector('.card__title');
+const formProfile = document.forms['edit-profile'];
+const formCard = document.forms['new-place'];
+const formAvatar = document.forms['new-avatar'];
 
 let userId = '';
 // конец переменных
@@ -51,6 +49,7 @@ enableValidation(validationConfig);
 
 // Слушатели нажатия кнопок
 profileEditButton.addEventListener('click', () => {
+    
     clearValidation(formProfile, validationConfig);
     setProfileInfo(formProfile, profileTitle, profileDescription);
     openModal(editPopup);
@@ -124,13 +123,6 @@ formCard.addEventListener('submit', (evt) => {
 // конец обработки сабмитов
 
 // объявление функций
-// функция открытия картинки по нажатию
-function openImage(evt) {
-    popupImage.src = evt.target.src;
-    popupImage.alt = evt.target.alt;
-    popupImageDescription.textContent = popupImageTitle.textContent;
-    openModal(imagePopup);
-};
 
 // info
 function setProfileInfo(form, title, description) {
@@ -141,7 +133,7 @@ function setProfileInfo(form, title, description) {
 //
 function setUserInfoApi(userName, userDescription, userAvatar, apiDataList) {
     userName.textContent = apiDataList.name;
-    userDescription = apiDataList.about;
+    userDescription.textContent = apiDataList.about;
     userAvatar.style.backgroundImage = 'url(' + apiDataList.avatar + ')';
 };
 
@@ -190,9 +182,9 @@ function changeButtonStatus(form, status, error = false) {
         } else {
             formButton.textContent = 'Сохранить';
         };
-        if (error) {
+       /* if (error) {
             formButton.textContent = 'У-у-пс';
-        };
+        };*/
     };
 };
 // конец объявления функций

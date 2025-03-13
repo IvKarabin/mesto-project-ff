@@ -38,6 +38,6 @@ function handleOverlayClick(evt) {
 // закрытие по крестику
 function handleXButton(evt) {
     if (evt.target.classList.contains('popup__close')) {
-        closeModal(evt.target);
-    }
+        closeModal(evt.target.closest('.popup'));
+    };
 };
