@@ -26,6 +26,7 @@ const profileImage = document.querySelector('.profile__image')
 const profileEditButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const profileEditAvatarButton = document.querySelector('.profile__edit-avatar-button');
+const closeButtons = document.querySelectorAll('.popup__close');
 // popup_type
 const editPopup = document.querySelector('.popup_type_edit');
 const addCardPopup = document.querySelector('.popup_type_new-card');
@@ -48,10 +49,10 @@ getData();
 enableValidation(validationConfig);
 
 // Слушатели нажатия кнопок
-profileEditButton.addEventListener('click', () => {
-    
+profileEditButton.addEventListener('click', () => {  
+    formProfile.elements.name.value = profileTitle.textContent;
+    formProfile.elements.description.value = profileDescription.textContent;
     clearValidation(formProfile, validationConfig);
-    setProfileInfo(formProfile, profileTitle, profileDescription);
     openModal(editPopup);
 });
 
@@ -65,6 +66,13 @@ profileEditAvatarButton.addEventListener('click', () => {
     openModal(avatarPopup);
 });
 
+closeButtons.forEach((button) => {
+    button.addEventListener('click', (evt) => {
+        const modalW = evt.target.closest('.popup');
+        closeModal(modalW);
+    });
+});
+
 // обработка сабмитов
 // профиль
 formProfile.addEventListener('submit', (evt) => {
@@ -73,11 +81,11 @@ formProfile.addEventListener('submit', (evt) => {
     patchUserData(formProfile.elements.name.value, formProfile.elements.description.value)
         .then((res) => {
             changeButtonStatus(formProfile, false);
-            setUserInfoApi(profileTitle, profileDescription, profileImage, res);
+            setUserInfoApi(res);
             closeModal(editPopup);
         })
         .catch((err) => {
-            changeButtonStatus(formProfile, false, true);
+            changeButtonStatus(formProfile, false);
             console.log(err);
         });
 });
@@ -88,12 +96,12 @@ avatarPopup.addEventListener('submit', (evt) => {
     changeButtonStatus(formAvatar, true);
     patchUserAvatar(formAvatar.elements.avatar.value)
         .then((res) => {
-            setUserInfoApi(profileTitle, profileDescription, profileImage, res);
+            setUserInfoApi(res);
             changeButtonStatus(formAvatar, false);
             closeModal(avatarPopup);
         })
         .catch((err) => {
-            changeButtonStatus(formAvatar, false, true);
+            changeButtonStatus(formAvatar, false);
             console.log(err);
         });
 });
@@ -108,16 +116,15 @@ formCard.addEventListener('submit', (evt) => {
     changeButtonStatus(formCard, true);
     postCard(cardInfo)
         .then((res) => {
-            cardInfo._id = res._id;
-            cardInfo.likes = res.likes;
-            const creatingCard = createCard(cardInfo, deleteCardApi, likeCardApi, unlikeCardApi, openCardModal, userId);
-            changeButtonStatus(formCard, false);
+            const creatingCard = createCard(res, deleteCardApi, likeCardApi, unlikeCardApi, openCardModal, userId);
             places.prepend(creatingCard);
             closeModal(addCardPopup);
         })
         .catch((err) => {
-            changeButtonStatus(formCard, false, true);
             console.log(err);
+        })
+        .finally(() => {
+            changeButtonStatus(formCard, false);
         });
 });
 // конец обработки сабмитов
@@ -125,16 +132,11 @@ formCard.addEventListener('submit', (evt) => {
 // объявление функций
 
 // info
-function setProfileInfo(form, title, description) {
-    form.elements.name.value = title.textContent;
-    form.elements.description.value = description.textContent;
-};
-
 //
-function setUserInfoApi(userName, userDescription, userAvatar, apiDataList) {
-    userName.textContent = apiDataList.name;
-    userDescription.textContent = apiDataList.about;
-    userAvatar.style.backgroundImage = 'url(' + apiDataList.avatar + ')';
+function setUserInfoApi(apiDataList) {
+    profileTitle.textContent = apiDataList.name;
+    profileDescription.textContent = apiDataList.about;
+    profileImage.style.backgroundImage = 'url(' + apiDataList.avatar + ')';
 };
 
 //
@@ -142,7 +144,7 @@ function getData() {
     Promise.all([getUserData(), getCardData()])
         .then(([userData, cardsData]) => {
             userId = userData['_id'];
-            setUserInfoApi(profileTitle, profileDescription, profileImage, userData);
+            setUserInfoApi(userData);
             initialCardsApi(cardsData, userId);
         })
         .catch((err) => console.log(err))
@@ -157,34 +159,20 @@ function initialCardsApi(apiDataList, userId) {
 };
 
 function openCardModal(imageSrc, textImage) {
-    imageData(imageSrc, textImage);
-    openModal(imagePopup);
-};
-
-function imageData(imageSrc, textImage) {
     popupImage.src = imageSrc;
     popupImage.alt = textImage;
     popupImageDescription.textContent = textImage;
-}
+    openModal(imagePopup);
+};
 
 // button-status
-function changeButtonStatus(form, status, error = false) {
+function changeButtonStatus(form, status) {
     const formButton = form.querySelector('.popup__button');
     if (status) {
-        if (form.name === 'newPlace') {
-            formButton.textContent = 'Создание...';
-        } else {
-            formButton.textContent = 'Сохранение...';
-        };
+        formButton.textContent = 'Сохранение...';
     } else {
-        if (form.name === 'newPlace') {
-            formButton.textContent = 'Создать';
-        } else {
-            formButton.textContent = 'Сохранить';
-        };
-       /* if (error) {
-            formButton.textContent = 'У-у-пс';
-        };*/
+        formButton.textContent = 'Сохранить';
     };
+    formButton.disabled = status;
 };
 // конец объявления функций

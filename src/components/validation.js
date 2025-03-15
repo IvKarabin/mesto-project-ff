@@ -14,7 +14,6 @@ export function enableValidation(validationConfig) {
                 toggleButtonState(formElement, validationConfig);
                 hideInputError(inputElement,errorElement,validationConfig);
             } else {
-                toggleButtonState(formElement, validationConfig);
                 showInputError(inputElement, errorElement, validationConfig);
             };
         });

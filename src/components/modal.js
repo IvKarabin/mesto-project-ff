@@ -1,19 +1,15 @@
 //функция открытия
 export function openModal(modal) {
-    modal.classList.add('popup_is-animated');
     modal.classList.add('popup_is-opened');
 
     document.addEventListener('keydown', handleEscape);
     modal.addEventListener('click', handleOverlayClick);
-    modal.addEventListener('click', handleXButton);
 }
 
 //функция закрытия
 export function closeModal(modal) {
-    setTimeout(() => {modal.classList.remove('popup_is-animated')}, 600);
     modal.classList.remove('popup_is-opened');
 
-    modal.removeEventListener('click', handleXButton);
     modal.removeEventListener('click', handleOverlayClick);
     document.removeEventListener('keydown', handleEscape);
 };
@@ -32,12 +28,5 @@ function handleEscape(evt) {
 function handleOverlayClick(evt) {
     if (evt.target.classList.contains('popup_is-opened')) {
         closeModal(evt.target);
-    };
-};
-
-// закрытие по крестику
-function handleXButton(evt) {
-    if (evt.target.classList.contains('popup__close')) {
-        closeModal(evt.target.closest('.popup'));
     };
 };
