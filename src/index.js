@@ -50,19 +50,25 @@ enableValidation(validationConfig);
 
 // Слушатели нажатия кнопок
 profileEditButton.addEventListener('click', () => {  
+    const buttonElement = formCard.querySelector(validationConfig.submitButtonSelector);
     formProfile.elements.name.value = profileTitle.textContent;
     formProfile.elements.description.value = profileDescription.textContent;
-    clearValidation(formProfile, validationConfig);
+    clearValidation(formAvatar, buttonElement, validationConfig);
+    buttonElement.disabled = true;
     openModal(editPopup);
 });
 
 addButton.addEventListener('click', () => {
-    clearValidation(formCard, validationConfig);
+    formCard.reset();
+    const buttonElement = formCard.querySelector(validationConfig.submitButtonSelector);
+    clearValidation(formCard, buttonElement, validationConfig);
     openModal(addCardPopup);
 });
 
 profileEditAvatarButton.addEventListener('click', () => {
-    clearValidation(formAvatar, validationConfig);
+    formAvatar.reset();
+    const buttonElement = formAvatar.querySelector(validationConfig.submitButtonSelector);
+    clearValidation(formAvatar, buttonElement, validationConfig);
     openModal(avatarPopup);
 });
 
@@ -87,6 +93,9 @@ formProfile.addEventListener('submit', (evt) => {
         .catch((err) => {
             changeButtonStatus(formProfile, false);
             console.log(err);
+        })
+        .finally(() => {
+            changeButtonStatus(formCard, false);
         });
 });
 
@@ -103,6 +112,9 @@ avatarPopup.addEventListener('submit', (evt) => {
         .catch((err) => {
             changeButtonStatus(formAvatar, false);
             console.log(err);
+        })
+        .finally(() => {
+            changeButtonStatus(formCard, false);
         });
 });
 
